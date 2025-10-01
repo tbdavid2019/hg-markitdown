@@ -24,43 +24,33 @@ def convert_file_to_md(file):
     return content
 
 
-with gr.Blocks(
-    title="📄 MarkItDown 文件轉 Markdown 線上工具",
-    theme=gr.themes.Soft()
-) as demo:
+with gr.Blocks(title="📄 MarkItDown 文件轉 Markdown 線上工具") as demo:
     
-    with gr.Column():
-        gr.Markdown("""
-        # 📄 MarkItDown 文件轉 Markdown
-        上傳支援格式檔案（PDF、Word、Excel、PowerPoint、圖片、音訊等），系統會自動轉換為 Markdown 純文字內容。
-        """)
-        
-        with gr.Row():
-            file_input = gr.File(
-                label="📁 拖曳或選擇檔案",
-                file_count="single",
-                type="filepath",
-            )
-            convert_button = gr.Button("🔄 開始轉換", variant="primary", size="lg")
-        
-        gr.Markdown("---")
-        
-        with gr.Group():
-            gr.Markdown("### 📝 轉換結果（純文字 Markdown）")
-            output = gr.Textbox(
-                label="",
-                value="請上傳檔案，轉換結果將顯示於此...",
-                lines=20,
-                max_lines=30,
-                show_copy_button=True,
-                placeholder="Markdown 內容會顯示在這裡...",
-                interactive=False,
-            )
+    gr.Markdown("""
+    # 📄 MarkItDown 文件轉 Markdown
+    上傳支援格式檔案，系統會自動轉換為 Markdown 純文字內容。
+    """)
     
-    # 綁定事件：拖曳上傳或選擇檔案時自動觸發轉換
+    file_input = gr.File(
+        label="📁 請將檔案拖曳到此區域，或點擊選擇檔案",
+        file_count="single",
+        type="filepath",
+        height=150,
+    )
+    
+    gr.Markdown("### 轉換結果")
+    
+    output = gr.Code(
+        label="",
+        value="",
+        language="markdown",
+        lines=25,
+        show_label=False,
+    )
+    
+    # 拖曳上傳或選擇檔案時自動觸發轉換
     file_input.change(convert_file_to_md, inputs=file_input, outputs=output)
-    # 手動點擊按鈕也可以觸發
-    convert_button.click(convert_file_to_md, inputs=file_input, outputs=output)
+    file_input.upload(convert_file_to_md, inputs=file_input, outputs=output)
 
 
 if __name__ == "__main__":
