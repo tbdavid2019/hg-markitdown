@@ -4,25 +4,7 @@ emoji: 📝
 colorFrom: blue
 colorTo: green
 sdk: gradio
-sdk_version: 6.2.0
-app_file: app.py
-pinned: false
----
-
-# MarkItDown 檔案轉 Markdown 工具tdown"
-emoji: 📝
-colorFrom: blue
-colorTo: green
-sdk: gradio
-sdk_version: 5.25.0
-app_file: app.py
-pinned: false
---- Markitdown
-emoji: �
-colorFrom: blue
-colorTo: green
-sdk: gradio
-sdk_version: 5.25.0
+sdk_version: 6.8.0
 app_file: app.py
 pinned: false
 ---
