@@ -54,7 +54,6 @@ with gr.Blocks(title="📄 MarkItDown 文件轉 Markdown 線上工具") as demo:
         label="📁 請將檔案拖曳到此區域，或點擊選擇多個檔案",
         file_count="multiple",
         type="filepath",
-        file_types=[".txt", ".md", ".html", ".csv", ".json", ".xml", ".pdf", ".doc", ".docx", ".xls", ".xlsx", ".ppt", ".pptx", "image", "audio"],
         height=150,
     )
     
@@ -68,9 +67,8 @@ with gr.Blocks(title="📄 MarkItDown 文件轉 Markdown 線上工具") as demo:
         show_label=False,
     )
     
-    # 拖曳上傳或選擇檔案時自動觸發轉換 (change 包含清除，upload 確保檔案上傳一定觸發)
+    # 拖曳上傳或選擇檔案時自動觸發轉換 (只保留 change，避免與 upload 衝突導致 race condition)
     file_input.change(convert_file_to_md, inputs=file_input, outputs=output)
-    file_input.upload(convert_file_to_md, inputs=file_input, outputs=output)
 
 
 if __name__ == "__main__":
