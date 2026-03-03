@@ -68,8 +68,9 @@ with gr.Blocks(title="📄 MarkItDown 文件轉 Markdown 線上工具") as demo:
         show_label=False,
     )
     
-    # 拖曳上傳或選擇檔案時自動觸發轉換 (change 包含上傳與清除)
+    # 拖曳上傳或選擇檔案時自動觸發轉換 (change 包含清除，upload 確保檔案上傳一定觸發)
     file_input.change(convert_file_to_md, inputs=file_input, outputs=output)
+    file_input.upload(convert_file_to_md, inputs=file_input, outputs=output)
 
 
 if __name__ == "__main__":
